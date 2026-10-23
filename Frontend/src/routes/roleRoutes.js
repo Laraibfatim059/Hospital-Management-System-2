@@ -17,6 +17,9 @@ export const roleRoutes = {
       '/admin/billing',
       '/admin/reports',
       '/admin/settings',
+      '/admin/profile',
+      '/profile',
+      '/settings',
     ],
   },
   [ROLES.DOCTOR]: {
@@ -28,6 +31,11 @@ export const roleRoutes = {
       '/doctor/prescriptions',
       '/doctor/lab-reports',
       '/doctor/schedule',
+      '/doctor/consultation',
+      '/doctor/settings',
+      '/doctor/profile',
+      '/profile',
+      '/settings',
     ],
   },
   [ROLES.NURSE]: {
@@ -38,6 +46,10 @@ export const roleRoutes = {
       '/nurse/vitals',
       '/nurse/wards',
       '/nurse/duty-roster',
+      '/nurse/settings',
+      '/nurse/profile',
+      '/profile',
+      '/settings',
     ],
   },
   [ROLES.RECEPTIONIST]: {
@@ -45,8 +57,13 @@ export const roleRoutes = {
     allowedPaths: [
       '/receptionist',
       '/receptionist/register',
+      '/receptionist/patients',
       '/receptionist/appointments',
       '/receptionist/billing',
+      '/receptionist/settings',
+      '/receptionist/profile',
+      '/profile',
+      '/settings',
     ],
   },
   [ROLES.PATIENT]: {
@@ -58,6 +75,9 @@ export const roleRoutes = {
       '/patient/lab-results',
       '/patient/bills',
       '/patient/profile',
+      '/patient/settings',
+      '/profile',
+      '/settings',
     ],
   },
   [ROLES.PHARMACIST]: {
@@ -67,6 +87,10 @@ export const roleRoutes = {
       '/pharmacist/prescriptions',
       '/pharmacist/inventory',
       '/pharmacist/dispensing',
+      '/pharmacist/settings',
+      '/pharmacist/profile',
+      '/profile',
+      '/settings',
     ],
   },
   [ROLES.LAB_TECHNICIAN]: {
@@ -76,6 +100,10 @@ export const roleRoutes = {
       '/lab/orders',
       '/lab/results',
       '/lab/reports',
+      '/lab/settings',
+      '/lab/profile',
+      '/profile',
+      '/settings',
     ],
   },
 };
@@ -96,5 +124,7 @@ export const getDefaultPath = (role) => roleRoutes[role]?.defaultPath || '/login
 export const isPathAllowed = (role, path) => {
   const config = roleRoutes[role];
   if (!config) return false;
-  return config.allowedPaths.some((p) => path.startsWith(p));
+  return config.allowedPaths.some((p) => path === p || path.startsWith(`${p}/`));
 };
+
+export default roleRoutes;

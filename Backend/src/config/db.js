@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    let uri = process.env.MONGO_URI;
+    let uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/hospital_management';
     
     // Check if we should use memory server (e.g. if URI is local)
     if (uri.includes('localhost') || uri.includes('127.0.0.1')) {

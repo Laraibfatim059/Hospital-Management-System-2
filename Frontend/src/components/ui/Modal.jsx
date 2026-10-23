@@ -15,16 +15,6 @@ const sizeClasses = {
 
 /**
  * Reusable dialog/modal component with backdrop, keyboard support, and scroll lock.
- *
- * @param {Object} props
- * @param {boolean} props.isOpen - Controls visibility of the modal
- * @param {Function} props.onClose - Callback triggered when backdrop or close button is clicked or Escape pressed
- * @param {string} [props.title] - Modal title in the header
- * @param {'sm'|'md'|'lg'|'xl'|'full'} [props.size='md'] - Max width size of the modal panel
- * @param {React.ReactNode} props.children - Modal body content
- * @param {string} [props.className] - Additional class names for the modal panel
- * @param {boolean} [props.showCloseButton=true] - Whether to show the top-right X button
- * @param {React.ReactNode} [props.footer] - Optional footer content
  */
 function Modal({
   isOpen,
@@ -66,7 +56,7 @@ function Modal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-fade-in"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
@@ -74,7 +64,7 @@ function Modal({
     >
       <div
         className={cn(
-          'bg-white rounded-xl shadow-xl w-full max-h-[85vh] overflow-hidden flex flex-col',
+          'bg-white dark:bg-[#151A24] border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl w-full max-h-[85vh] overflow-hidden flex flex-col animate-scale-in text-slate-900 dark:text-slate-100',
           sizeClasses[size] || sizeClasses.md,
           className
         )}
@@ -82,9 +72,9 @@ function Modal({
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 shrink-0">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800 shrink-0">
             {title ? (
-              <h2 id="modal-title" className="text-lg font-semibold text-slate-900">
+              <h2 id="modal-title" className="text-lg font-semibold text-slate-900 dark:text-white">
                 {title}
               </h2>
             ) : (
@@ -94,7 +84,7 @@ function Modal({
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                className="rounded-lg p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="h-5 w-5" />
@@ -110,7 +100,7 @@ function Modal({
 
         {/* Footer */}
         {footer && (
-          <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 shrink-0">
+          <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#11151E] shrink-0">
             {footer}
           </div>
         )}
@@ -137,7 +127,7 @@ function ModalFooter({ children, className }) {
   return (
     <div
       className={cn(
-        'flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-200 bg-slate-50 shrink-0',
+        'flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#11151E] shrink-0',
         className
       )}
     >
@@ -150,3 +140,4 @@ Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 
 export { Modal, ModalBody, ModalFooter };
+export default Modal;

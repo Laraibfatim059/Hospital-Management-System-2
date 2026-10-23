@@ -180,7 +180,7 @@ function DataTable({
     <Card className={cn('overflow-hidden', className)}>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-slate-200">
+          <thead className="bg-slate-50 dark:bg-[#11151E] border-b border-slate-200 dark:border-slate-800">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -192,8 +192,8 @@ function DataTable({
                       key={header.id}
                       colSpan={header.colSpan}
                       className={cn(
-                        'px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider select-none',
-                        canSort && 'cursor-pointer hover:bg-slate-100 hover:text-slate-700'
+                        'px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider select-none',
+                        canSort && 'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200'
                       )}
                       onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
                     >
@@ -207,9 +207,9 @@ function DataTable({
                         {canSort && (
                           <span className="shrink-0 text-slate-400">
                             {sorted === 'asc' ? (
-                              <ArrowUp className="h-3.5 w-3.5 text-blue-600" />
+                              <ArrowUp className="h-3.5 w-3.5 text-[#00D4FF]" />
                             ) : sorted === 'desc' ? (
-                              <ArrowDown className="h-3.5 w-3.5 text-blue-600" />
+                              <ArrowDown className="h-3.5 w-3.5 text-[#00D4FF]" />
                             ) : (
                               <ArrowUpDown className="h-3.5 w-3.5 text-slate-400" />
                             )}
@@ -222,11 +222,11 @@ function DataTable({
               </tr>
             ))}
           </thead>
-          <tbody className="divide-y divide-slate-200 bg-white">
+          <tbody className="divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-[#151A24]">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-slate-50 transition-colors">
+              <tr key={row.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-4 py-3 text-slate-700">
+                  <td key={cell.id} className="px-4 py-3 text-slate-700 dark:text-slate-300">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -237,7 +237,7 @@ function DataTable({
       </div>
 
       {pagination && (
-        <div className="px-4 border-t border-slate-200 bg-white">
+        <div className="px-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151A24]">
           <Pagination
             currentPage={
               pagination.pageIndex !== undefined

@@ -15,18 +15,22 @@ const updateDocumentTheme = (isDark) => {
   }
 };
 
-// Apply initial dark theme early if saved in localStorage to prevent theme flashing
+// Apply initial dark theme early (defaults to dark mode) to prevent theme flashing
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   try {
     const saved = localStorage.getItem('theme-storage');
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (parsed?.state?.isDarkMode) {
+      if (parsed?.state?.isDarkMode !== false) {
         document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
+    } else {
+      document.documentElement.classList.add('dark');
     }
   } catch {
-    // Ignore storage read/parse error
+    document.documentElement.classList.add('dark');
   }
 }
 
@@ -36,7 +40,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 export const useThemeStore = create(
   persist(
     (set) => ({
-      isDarkMode: false,
+      isDarkMode: true,
 
       /**
        * Toggles the current dark mode setting and updates document root class.

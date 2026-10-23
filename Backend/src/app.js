@@ -10,7 +10,13 @@ const app = express();
 // Security Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or Postman) or any localhost origin in development
+    if (!origin || process.env.NODE_ENV === 'development' || origin === (process.env.FRONTEND_URL || 'http://localhost:5173')) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   credentials: true,
 }));
 
@@ -20,13 +26,13 @@ const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 
-app.use(mongoSanitize());
+// app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 mins
-  max: 100 // 100 requests per 10 mins
+  max: process.env.NODE_ENV === 'development' ? 2000 : 100 // 2000 requests per 10 mins in dev
 });
 app.use(limiter);
 

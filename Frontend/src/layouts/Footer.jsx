@@ -8,8 +8,7 @@ export function Footer({ className }) {
   return (
     <footer
       className={cn(
-        'bg-white border-t border-slate-200 px-6 py-3 shrink-0',
-        'dark:bg-slate-900 dark:border-slate-800',
+        'bg-[#080A0F] border-t border-slate-800 px-6 py-3 shrink-0',
         className
       )}
     >

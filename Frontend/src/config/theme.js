@@ -4,19 +4,32 @@
  */
 export const theme = {
   colors: {
+    background: '#080A0F',
+    card: '#151A24',
+    cardHover: '#1C2230',
+    cyan: {
+      DEFAULT: '#00D4FF',
+      light: '#38E1FF',
+      dark: '#00B4D8',
+    },
+    purple: {
+      DEFAULT: '#7C5CFC',
+      light: '#9B82FD',
+      dark: '#633BFB',
+    },
     primary: {
-      50: '#eff6ff',
-      100: '#dbeafe',
-      200: '#bfdbfe',
-      300: '#93c5fd',
-      400: '#60a5fa',
-      500: '#3b82f6',
-      600: '#2563eb', // Main brand primary
-      700: '#1d4ed8',
-      800: '#1e40af',
-      900: '#1e3a8a',
-      950: '#172554',
-      DEFAULT: '#2563eb',
+      50: '#ecfeff',
+      100: '#cffafe',
+      200: '#a5f3fc',
+      300: '#67e8f9',
+      400: '#22d3ee',
+      500: '#06b6d4',
+      600: '#00D4FF', // Main brand cyan-blue primary
+      700: '#00B4D8',
+      800: '#0e7490',
+      900: '#155e75',
+      950: '#083344',
+      DEFAULT: '#00D4FF',
     },
     success: {
       50: '#ecfdf5',

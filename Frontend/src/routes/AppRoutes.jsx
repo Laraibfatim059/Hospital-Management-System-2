@@ -56,7 +56,8 @@ import {
 
 /**
  * Top-level application routing hierarchy.
- * Manages public auth routes, role-guarded dashboards, and fallback error pages.
+ * Manages public auth routes, role-guarded dashboards across all 10 phases,
+ * and reliable 404 error routing without fake fallbacks.
  */
 export function AppRoutes() {
   return (
@@ -75,7 +76,7 @@ export function AppRoutes() {
       <Route path="/session-expired" element={<SessionExpiredPage />} />
       <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-      {/* Admin Protected Routes */}
+      {/* Phase 1 & 2: Admin Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
         <Route path="/admin" element={<DashboardLayout />}>
           <Route index element={<AdminDashboard />} />
@@ -89,11 +90,11 @@ export function AppRoutes() {
           <Route path="reports" element={<AdminDashboard />} />
           <Route path="settings" element={<ChangePasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<AdminDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* Doctor Protected Routes */}
+      {/* Phase 2 & 5: Doctor Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['doctor']} />}>
         <Route path="/doctor" element={<DashboardLayout />}>
           <Route index element={<DoctorDashboard />} />
@@ -101,16 +102,16 @@ export function AppRoutes() {
           <Route path="patients" element={<PatientListPage />} />
           <Route path="patients/:id" element={<PatientDetailsPage />} />
           <Route path="appointments" element={<AppointmentListPage />} />
-          <Route path="prescriptions" element={<DoctorDashboard />} />
-          <Route path="lab-reports" element={<DoctorDashboard />} />
+          <Route path="prescriptions" element={<PrescriptionDispensePage />} />
+          <Route path="lab-reports" element={<LabOrdersPage />} />
           <Route path="schedule" element={<AppointmentCalendarPage />} />
           <Route path="settings" element={<ChangePasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<DoctorDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* Nurse Protected Routes */}
+      {/* Phase 2 & 9: Nurse Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['nurse']} />}>
         <Route path="/nurse" element={<DashboardLayout />}>
           <Route index element={<NurseDashboard />} />
@@ -121,11 +122,11 @@ export function AppRoutes() {
           <Route path="duty-roster" element={<NurseDashboard />} />
           <Route path="settings" element={<ChangePasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<NurseDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* Receptionist Protected Routes */}
+      {/* Phase 2: Receptionist Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['receptionist']} />}>
         <Route path="/receptionist" element={<DashboardLayout />}>
           <Route index element={<ReceptionistDashboard />} />
@@ -136,11 +137,11 @@ export function AppRoutes() {
           <Route path="billing" element={<BillingDashboard />} />
           <Route path="settings" element={<ChangePasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<ReceptionistDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* Patient Protected Routes */}
+      {/* Phase 2 & 3: Patient Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['patient']} />}>
         <Route path="/patient" element={<DashboardLayout />}>
           <Route index element={<PatientDashboard />} />
@@ -150,11 +151,11 @@ export function AppRoutes() {
           <Route path="bills" element={<BillingDashboard />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="settings" element={<ChangePasswordPage />} />
-          <Route path="*" element={<PatientDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* Pharmacist Protected Routes */}
+      {/* Phase 7: Pharmacist Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['pharmacist']} />}>
         <Route path="/pharmacist" element={<DashboardLayout />}>
           <Route index element={<PharmacistDashboard />} />
@@ -163,11 +164,11 @@ export function AppRoutes() {
           <Route path="dispensing" element={<PrescriptionDispensePage />} />
           <Route path="settings" element={<ChangePasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<PharmacistDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* Lab Technician Protected Routes */}
+      {/* Phase 8: Lab Technician Protected Routes */}
       <Route element={<ProtectedRoute allowedRoles={['lab_technician']} />}>
         <Route path="/lab" element={<DashboardLayout />}>
           <Route index element={<LabTechDashboard />} />
@@ -176,7 +177,7 @@ export function AppRoutes() {
           <Route path="reports" element={<TestCatalogPage />} />
           <Route path="settings" element={<ChangePasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<LabTechDashboard />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
@@ -190,7 +191,7 @@ export function AppRoutes() {
         </Route>
       </Route>
 
-      {/* 404 Catch-All Route */}
+      {/* Top-level 404 Catch-All Route for invalid URLs */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

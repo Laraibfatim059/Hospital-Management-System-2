@@ -63,8 +63,7 @@ export function Navbar({ className }) {
     <>
       <header
         className={cn(
-          'fixed top-0 right-0 z-30 h-16 bg-white border-b border-slate-200 transition-all duration-300',
-          'dark:bg-slate-900 dark:border-slate-800',
+          'fixed top-0 right-0 z-30 h-16 bg-[#080A0F]/90 backdrop-blur-md border-b border-slate-800 transition-all duration-300 text-slate-100',
           className
         )}
         style={{ left: sidebarWidth }}

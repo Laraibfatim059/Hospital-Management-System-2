@@ -17,7 +17,7 @@ export function DashboardLayout({ className }) {
   const sidebarWidth = isMobile ? '0px' : isCollapsed ? '64px' : '256px';
 
   return (
-    <div className={cn('flex h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden', className)}>
+    <div className={cn('flex h-screen bg-[#080A0F] text-slate-100 overflow-hidden', className)}>
       {/* Sidebar Navigation */}
       <Sidebar />
 

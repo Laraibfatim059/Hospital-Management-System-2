@@ -1,0 +1,13 @@
+{
+  "name": "hospital-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hospital Management System - 10 Phases (Full Stack & Deployment Ready)",
+  "scripts": {
+    "dev": "npm run dev --prefix Frontend",
+    "build": "npm run build --prefix Frontend",
+    "preview": "npm run preview --prefix Frontend",
+    "lint": "npm run lint --prefix Frontend",
+    "server": "npm run dev --prefix Backend"
+  }
+}

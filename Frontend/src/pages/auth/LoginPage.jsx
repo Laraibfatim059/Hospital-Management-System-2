@@ -23,6 +23,7 @@ export function LoginPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -126,6 +127,36 @@ export function LoginPage() {
             >
               Sign In
             </Button>
+          </div>
+
+          {/* Quick Demo Credentials */}
+          <div className="pt-4 border-t border-slate-200 mt-4">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+              Quick Demo Accounts (Click to fill)
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { label: 'Admin', email: 'admin@hospital.com' },
+                { label: 'Doctor', email: 'doctor@hospital.com' },
+                { label: 'Nurse', email: 'nurse@hospital.com' },
+                { label: 'Receptionist', email: 'receptionist@hospital.com' },
+                { label: 'Pharmacist', email: 'pharmacist@hospital.com' },
+                { label: 'Lab Tech', email: 'lab@hospital.com' },
+                { label: 'Patient', email: 'patient@hospital.com' },
+              ].map(({ label, email }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => {
+                    setValue('email', email, { shouldValidate: true });
+                    setValue('password', 'password123', { shouldValidate: true });
+                  }}
+                  className="text-xs px-2.5 py-1 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-700 rounded-md font-medium transition-colors border border-slate-200 cursor-pointer"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
         </form>
       </Card.Body>
